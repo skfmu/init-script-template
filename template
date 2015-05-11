@@ -65,6 +65,10 @@ case "$1" in
             sleep 1
         done
         echo
+        if is_running; then
+            echo "Process not responding; sending signal 9"
+            killtree `get_pid` KILL
+        fi
 
         if is_running; then
             echo "Not stopped; may still be shutting down or shutdown may have failed"
